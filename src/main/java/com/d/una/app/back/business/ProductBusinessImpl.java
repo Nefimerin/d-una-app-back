@@ -1,15 +1,14 @@
 package com.d.una.app.back.business;
 
-import com.d.una.app.back.exception.BusinessRuleException;
-import com.d.una.app.back.mapper.IProductMapper;
-import com.d.una.app.back.repository.IProductRepository;
 import com.d.una.app.back.config.MessageLoader;
 import com.d.una.app.back.domain.ProductDto;
 import com.d.una.app.back.domain.ResponseDto;
+import com.d.una.app.back.exception.BusinessRuleException;
+import com.d.una.app.back.mapper.IProductMapper;
 import com.d.una.app.back.model.Product;
+import com.d.una.app.back.repository.IProductRepository;
 import com.d.una.app.back.util.MessagesConstants;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +46,7 @@ public class ProductBusinessImpl implements IProductBusiness {
     public ResponseDto<ProductDto> createProduct(ProductDto productDto) {
         Product product = productMapper.toDomain(productDto);
         final var productSaved = productRepository.save(product);
-        return new ResponseDto<>(HttpStatus.OK.value(),MessageLoader.getInstance().getMessage(MessagesConstants.IM001), productMapper.toDto(productSaved));
+        return new ResponseDto<>(HttpStatus.OK.value(),MessageLoader.getInstance().getMessage(MessagesConstants.IM002), productMapper.toDto(productSaved));
     }
 
     @Override

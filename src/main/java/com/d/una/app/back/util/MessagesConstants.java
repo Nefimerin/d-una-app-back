@@ -4,6 +4,7 @@ public class MessagesConstants {
     private MessagesConstants(){}
     /*Info Messages*/
     public static final String IM001 = "IM001";
+    public static final String IM002 = "IM002";
 
     /*Error Messages*/
 
@@ -14,5 +15,6 @@ public class MessagesConstants {
     public static final String EM005 = "EM005";
     public static final String EM006 = "EM006";
     public static final String EM007 = "EM007";
-
+    public static final String EM008 = "EM008";
+    public static final String EM009 = "EM009";
 }
