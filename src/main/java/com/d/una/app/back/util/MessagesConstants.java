@@ -17,4 +17,5 @@ public class MessagesConstants {
     public static final String EM007 = "EM007";
     public static final String EM008 = "EM008";
     public static final String EM009 = "EM009";
+    public static final String EM010 = "EM010";
 }
