@@ -67,7 +67,6 @@ public class OderBusinessImpl implements IOrderBusiness{
         order.setOrderTime(LocalTime.now());
         order.setProducts(products);
         products.forEach(e -> e.setStock(e.getStock() - 1));
-        this.productRepository.saveAll(products);
         final var orderSaved = orderRepository.save(order);
         return new ResponseDto<>(HttpStatus.OK.value(),MessageLoader.getInstance().getMessage(MessagesConstants.IM002), orderMapper.toDtoResponse(orderSaved));
     }
@@ -77,6 +76,18 @@ public class OderBusinessImpl implements IOrderBusiness{
         logger.info("Updating order with ID: {}", orderId);
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new BusinessRuleException(HttpStatus.BAD_REQUEST.value(), MessagesConstants.EM001, MessageLoader.getInstance().getMessage(MessagesConstants.EM001, orderId)));
+        List<Product> requestedProducts = productRepository.findAllById(orderRequestDto.getProductsIds());
+        List<Product> newProductsToAdd = requestedProducts.stream()
+                .filter(product -> !order.getProducts().contains(product))
+                .toList();
+        List<Product> removedProducts = order.getProducts().stream()
+                .filter(product -> !requestedProducts.contains(product))
+                .toList();
+        order.setProducts(requestedProducts);
+        order.setStatus(orderRequestDto.getStatus());
+        newProductsToAdd.forEach(e -> e.setStock(e.getStock() - 1));
+        removedProducts.forEach(e -> e.setStock(e.getStock() + 1));
+        this.productRepository.saveAll(removedProducts);
         Order updatedOrder = orderRepository.save(order);
         OrderResponseDto updatedOrderRequestDto = orderMapper.toDtoResponse(updatedOrder);
         return new ResponseDto<>(HttpStatus.OK.value(),MessageLoader.getInstance().getMessage(MessagesConstants.IM001), updatedOrderRequestDto);
