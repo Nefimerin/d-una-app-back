@@ -1,8 +1,9 @@
 package com.d.una.app.back.rest;
 
 import com.d.una.app.back.business.IRoleBusiness;
-import com.d.una.app.back.domain.RoleDto;
 import com.d.una.app.back.domain.ResponseDto;
+import com.d.una.app.back.domain.RoleDto;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,13 +37,13 @@ public class RoleRest {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseDto<RoleDto>> createProduct(@RequestBody RoleDto roleDto) {
+    public ResponseEntity<ResponseDto<RoleDto>> createProduct(@RequestBody @Valid RoleDto roleDto) {
         ResponseDto<RoleDto> responseDto = roleBusiness.createRole(roleDto);
         return responseDto.of();
     }
 
     @PutMapping("/{roleId}")
-    public ResponseEntity<ResponseDto<RoleDto>> updateProduct(@PathVariable Long roleId, @RequestBody RoleDto roleDto) {
+    public ResponseEntity<ResponseDto<RoleDto>> updateProduct(@PathVariable Long roleId, @RequestBody @Valid RoleDto roleDto) {
         ResponseDto<RoleDto> responseDto = roleBusiness.updateRole(roleId, roleDto);
         return responseDto.of();
     }

@@ -12,8 +12,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
-    private Long id;
+public class UserRequestDto {
     @NotBlank
     @NotEmpty
     private String firstName;
@@ -30,4 +29,5 @@ public class UserDto {
     @NotBlank
     @NotEmpty
     private String address;
+
 }

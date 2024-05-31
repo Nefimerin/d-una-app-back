@@ -58,6 +58,7 @@ public class ProductBusinessImpl implements IProductBusiness {
         product.setName(productDto.getName());
         product.setType(productDto.getType());
         product.setPrice(productDto.getPrice());
+        product.setStock(productDto.getStock());
         Product updatedProduct = productRepository.save(product);
         ProductDto updatedProductDto = productMapper.toDto(updatedProduct);
         return new ResponseDto<>(HttpStatus.OK.value(),MessageLoader.getInstance().getMessage(MessagesConstants.IM001), updatedProductDto);

@@ -23,6 +23,8 @@ public class Product {
     private String description;
     @Column(length = 35)
     private Double price;
+    @Column
+    private Integer stock;
     @Enumerated(EnumType.STRING)
     @Column
     private ProductTypeEnum type;

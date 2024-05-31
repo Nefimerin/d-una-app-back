@@ -2,7 +2,8 @@ package com.d.una.app.back.rest;
 
 import com.d.una.app.back.business.IUserBusiness;
 import com.d.una.app.back.domain.ResponseDto;
-import com.d.una.app.back.domain.UserDto;
+import com.d.una.app.back.domain.UserRequestDto;
+import com.d.una.app.back.domain.UserResponseDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,32 +26,32 @@ public class UserRest {
     private final IUserBusiness userBusiness;
 
     @GetMapping
-    public ResponseEntity<ResponseDto<List<UserDto>>> findAllUsers() {
-        ResponseDto<List<UserDto>> responseDto = userBusiness.findAllUsers();
+    public ResponseEntity<ResponseDto<List<UserResponseDto>>> findAllUsers() {
+        ResponseDto<List<UserResponseDto>> responseDto = userBusiness.findAllUsers();
         return responseDto.of();
     }
 
-    @GetMapping("/{roleId}")
-    public ResponseEntity<ResponseDto<UserDto>> getProductById(@PathVariable Long roleId) {
-        ResponseDto<UserDto> responseDto = userBusiness.getUserById(roleId);
+    @GetMapping("/{userId}")
+    public ResponseEntity<ResponseDto<UserResponseDto>> getUserById(@PathVariable Long userId) {
+        ResponseDto<UserResponseDto> responseDto = userBusiness.getUserById(userId);
         return responseDto.of();
     }
 
     @PostMapping
-    public ResponseEntity<ResponseDto<UserDto>> createProduct(@Valid @RequestBody UserDto roleDto) {
-        ResponseDto<UserDto> responseDto = userBusiness.createUser(roleDto);
+    public ResponseEntity<ResponseDto<UserResponseDto>> createUser(@Valid @RequestBody UserRequestDto userDto) {
+        ResponseDto<UserResponseDto> responseDto = userBusiness.createUser(userDto);
         return responseDto.of();
     }
 
-    @PutMapping("/{roleId}")
-    public ResponseEntity<ResponseDto<UserDto>> updateProduct(@PathVariable Long roleId, @Valid @RequestBody UserDto roleDto) {
-        ResponseDto<UserDto> responseDto = userBusiness.updateUser(roleId, roleDto);
+    @PutMapping("/{userId}")
+    public ResponseEntity<ResponseDto<UserResponseDto>> updateUser(@PathVariable Long userId, @Valid @RequestBody UserRequestDto userDto) {
+        ResponseDto<UserResponseDto> responseDto = userBusiness.updateUser(userId, userDto);
         return responseDto.of();
     }
 
-    @DeleteMapping("/{roleId}")
-    public ResponseEntity<ResponseDto<Void>> deleteProduct(@PathVariable Long roleId) {
-        ResponseDto<Void> responseDto = userBusiness.deleteUser(roleId);
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<ResponseDto<Void>> deleteUser(@PathVariable Long userId) {
+        ResponseDto<Void> responseDto = userBusiness.deleteUser(userId);
         return responseDto.of();
     }
 }
