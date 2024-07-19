@@ -1,27 +1,31 @@
 package com.d.una.app.back.mapper;
 
-import com.d.una.app.back.domain.UserDto;
+import com.d.una.app.back.domain.RoleDto;
+import com.d.una.app.back.domain.UserRequestDto;
+import com.d.una.app.back.domain.UserResponseDto;
+import com.d.una.app.back.model.Role;
 import com.d.una.app.back.model.User;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-07T21:55:18-0500",
+    date = "2024-06-16T18:53:37-0500",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
 )
 @Component
 public class IUserMapperImpl implements IUserMapper {
 
     @Override
-    public User toDomain(UserDto dto) {
+    public User toDomain(UserRequestDto dto) {
         if ( dto == null ) {
             return null;
         }
 
         User user = new User();
 
-        user.setId( dto.getId() );
         user.setFirstName( dto.getFirstName() );
         user.setLastName( dto.getLastName() );
         user.setEmail( dto.getEmail() );
@@ -32,20 +36,63 @@ public class IUserMapperImpl implements IUserMapper {
     }
 
     @Override
-    public UserDto toDto(User entity) {
+    public UserRequestDto toDto(User entity) {
         if ( entity == null ) {
             return null;
         }
 
-        UserDto userDto = new UserDto();
+        UserRequestDto userRequestDto = new UserRequestDto();
 
-        userDto.setId( entity.getId() );
-        userDto.setFirstName( entity.getFirstName() );
-        userDto.setLastName( entity.getLastName() );
-        userDto.setEmail( entity.getEmail() );
-        userDto.setPassword( entity.getPassword() );
-        userDto.setAddress( entity.getAddress() );
+        userRequestDto.setFirstName( entity.getFirstName() );
+        userRequestDto.setLastName( entity.getLastName() );
+        userRequestDto.setEmail( entity.getEmail() );
+        userRequestDto.setPassword( entity.getPassword() );
+        userRequestDto.setAddress( entity.getAddress() );
 
-        return userDto;
+        return userRequestDto;
+    }
+
+    @Override
+    public UserResponseDto toDtoResponse(User entity) {
+        if ( entity == null ) {
+            return null;
+        }
+
+        UserResponseDto userResponseDto = new UserResponseDto();
+
+        userResponseDto.setId( entity.getId() );
+        userResponseDto.setFirstName( entity.getFirstName() );
+        userResponseDto.setLastName( entity.getLastName() );
+        userResponseDto.setRoles( roleListToRoleDtoList( entity.getRoles() ) );
+        userResponseDto.setEmail( entity.getEmail() );
+
+        return userResponseDto;
+    }
+
+    protected RoleDto roleToRoleDto(Role role) {
+        if ( role == null ) {
+            return null;
+        }
+
+        RoleDto roleDto = new RoleDto();
+
+        roleDto.setRoleId( role.getRoleId() );
+        roleDto.setName( role.getName() );
+        roleDto.setDescription( role.getDescription() );
+
+        return roleDto;
+    }
+
+    protected List<RoleDto> roleListToRoleDtoList(List<Role> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<RoleDto> list1 = new ArrayList<RoleDto>( list.size() );
+        for ( Role role : list ) {
+            list1.add( roleToRoleDto( role ) );
+        }
+
+        return list1;
     }
 }
