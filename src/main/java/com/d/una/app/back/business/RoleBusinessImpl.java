@@ -44,7 +44,7 @@ public class RoleBusinessImpl implements IRoleBusiness{
     @Override
     public ResponseDto<RoleDto> createRole(RoleDto roleDto) {
         if (this.roleRepository.existsByName(roleDto.getName())){
-            throw new BusinessRuleException(HttpStatus.BAD_REQUEST.value(), MessagesConstants.EM009, MessageLoader.getInstance().getMessage(MessagesConstants.EM009, roleDto.getName()));
+            throw new BusinessRuleException(HttpStatus.BAD_REQUEST.value(), MessagesConstants.EM009, MessageLoader.getInstance().getMessage(MessagesConstants.EM009, roleDto.getDescription()));
         }
         Role role = roleMapper.toDomain(roleDto);
         final var productSaved = roleRepository.save(role);
@@ -59,7 +59,7 @@ public class RoleBusinessImpl implements IRoleBusiness{
                 .orElseThrow(() -> new BusinessRuleException(HttpStatus.BAD_REQUEST.value(), MessagesConstants.EM008, MessageLoader.getInstance().getMessage(MessagesConstants.EM008, roleId)));
         final var roleOpt = this.roleRepository.findByName(roleDto.getName());
         if (roleOpt.isPresent() && !roleOpt.get().getRoleId().equals(roleId))
-            throw new BusinessRuleException(HttpStatus.BAD_REQUEST.value(), MessagesConstants.EM009, MessageLoader.getInstance().getMessage(MessagesConstants.EM009, roleDto.getName()));
+            throw new BusinessRuleException(HttpStatus.BAD_REQUEST.value(), MessagesConstants.EM009, MessageLoader.getInstance().getMessage(MessagesConstants.EM009, roleDto.getDescription()));
         role.setDescription(roleDto.getDescription());
         role.setName(roleDto.getName());
         Role updatedProduct = roleRepository.save(role);
