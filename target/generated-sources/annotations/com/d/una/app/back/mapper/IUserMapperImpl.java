@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-08-03T16:55:10-0500",
+    date = "2024-08-17T16:44:40-0500",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 21.0.4 (Amazon.com Inc.)"
 )
 @Component
@@ -65,6 +65,7 @@ public class IUserMapperImpl implements IUserMapper {
         userResponseDto.setLastName( entity.getLastName() );
         userResponseDto.setRoles( roleListToRoleDtoList( entity.getRoles() ) );
         userResponseDto.setEmail( entity.getEmail() );
+        userResponseDto.setAddress( entity.getAddress() );
 
         return userResponseDto;
     }

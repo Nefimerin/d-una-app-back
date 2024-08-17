@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-08-03T16:55:11-0500",
+    date = "2024-08-17T16:44:40-0500",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 21.0.4 (Amazon.com Inc.)"
 )
 @Component
@@ -137,6 +137,7 @@ public class IOrderMapperImpl implements IOrderMapper {
         userResponseDto.setLastName( user.getLastName() );
         userResponseDto.setRoles( roleListToRoleDtoList( user.getRoles() ) );
         userResponseDto.setEmail( user.getEmail() );
+        userResponseDto.setAddress( user.getAddress() );
 
         return userResponseDto;
     }
