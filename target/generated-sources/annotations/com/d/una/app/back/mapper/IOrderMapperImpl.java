@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-08-17T16:44:40-0500",
+    date = "2024-08-18T20:47:33-0500",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 21.0.4 (Amazon.com Inc.)"
 )
 @Component
@@ -64,6 +64,7 @@ public class IOrderMapperImpl implements IOrderMapper {
         orderResponseDto.setTotalPrice( entity.getTotalPrice() );
         orderResponseDto.setProducts( productListToProductDtoList( entity.getProducts() ) );
         orderResponseDto.setUser( userToUserResponseDto( entity.getUser() ) );
+        orderResponseDto.setStatus( entity.getStatus() );
 
         return orderResponseDto;
     }
