@@ -1,5 +1,6 @@
 package com.d.una.app.back.domain;
 
+import com.d.una.app.back.model.enums.OrderStatusEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,4 +20,6 @@ public class OrderResponseDto {
     private Long userId;
     private List<ProductDto> products;
     private UserResponseDto user;
+    private OrderStatusEnum status;
+
 }

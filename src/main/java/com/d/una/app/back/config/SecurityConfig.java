@@ -38,6 +38,7 @@ public class SecurityConfig {
                         .requestMatchers(new AntPathRequestMatcher("/role/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/user/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/product/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/order/**")).permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
