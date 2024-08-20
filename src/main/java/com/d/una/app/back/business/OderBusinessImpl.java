@@ -85,6 +85,7 @@ public class OderBusinessImpl implements IOrderBusiness{
                 .toList();
         order.setProducts(requestedProducts);
         order.setStatus(orderRequestDto.getStatus());
+        order.setTotalPrice(orderRequestDto.getTotalPrice());
         newProductsToAdd.forEach(e -> e.setStock(e.getStock() - 1));
         removedProducts.forEach(e -> e.setStock(e.getStock() + 1));
         this.productRepository.saveAll(removedProducts);
